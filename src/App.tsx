@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import * as hangul from "hangul-js";
 
 function App() {
+  let x = hangul.disassemble("가나다"); // ['ㄱ','ㅏ','ㄴ','ㅏ','ㄷ','ㅏ']
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {x}
+      <Selector />
     </div>
   );
+}
+
+function Selector() {
+  return (
+    <>
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
+    
+  </>
+  )
 }
 
 export default App;
