@@ -4,11 +4,9 @@ import * as hangul from "hangul-js";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
+import { romanizeWord } from "@lazy-cjk/korean-romanize";
 
 function App() {
-  let x = hangul.disassemble("가나다"); // ['ㄱ','ㅏ','ㄴ','ㅏ','ㄷ','ㅏ']
-  let y = hangul.assemble(["ㄱ", "ㅏ", "ㅋ"]);
-  console.log(y);
   return (
     <div className="App">
       <Selector />
@@ -21,6 +19,7 @@ function Selector() {
   const [vowels, setVowels] = useState<string[]>([]);
   const [endingConsonants, setEndingConsonants] = useState<string[]>([]);
   const [word, setWord] = useState<string>();
+  const [romanized, setRomanized] = useState<string>();
 
   const handleStartingConsonant = (
     startingConsonant: string,
@@ -68,6 +67,7 @@ function Selector() {
     const end = endingConsonants[getRandomInt(endingConsonants.length)];
     const combined = hangul.assemble([start, vowel, end]);
     setWord(combined);
+    setRomanized(romanizeWord(combined));
   };
   return (
     <>
@@ -163,7 +163,7 @@ function Selector() {
         Create Word
       </Button>
       <h1>
-      {word}
+      {word} / {romanized}
       </h1>
     </>
   );
