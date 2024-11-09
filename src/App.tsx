@@ -20,6 +20,7 @@ function Selector() {
   const [endingConsonants, setEndingConsonants] = useState<string[]>([]);
   const [word, setWord] = useState<string>();
   const [romanized, setRomanized] = useState<string>();
+  const [showAnswer, setShowAnswer] = useState<boolean>(false);
 
   const handleStartingConsonant = (
     startingConsonant: string,
@@ -68,7 +69,12 @@ function Selector() {
     const combined = hangul.assemble([start, vowel, end]);
     setWord(combined);
     setRomanized(romanizeWord(combined));
+    setShowAnswer(false);
   };
+
+  const setShow = () => {
+    setShowAnswer(true);
+  }
   return (
     <>
       <h1>Select Starting Consonants(자음) </h1>
@@ -163,8 +169,14 @@ function Selector() {
         Create Word
       </Button>
       <h1>
-      {word} / {romanized}
+      {word}
       </h1>
+      <Button variant="contained" onClick={setShow}>
+        Show Pronounciation
+      </Button>
+      {showAnswer && <h1>
+        {romanized}
+        </h1>}
     </>
   );
 }
